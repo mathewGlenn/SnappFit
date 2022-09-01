@@ -1,0 +1,13 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/montserrat_bold.ttf",
+      "sha1": "3a54407a2b26ff4718708a4726b10cb070d16534"
+    },
+    {
+      "path": "assets/fonts/montserrat_semi_bold.ttf",
+      "sha1": "f829de4c176fb2ccf5e33360920f48de6794434e"
+    }
+  ]
+}
