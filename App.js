@@ -18,8 +18,16 @@ import GetNameScreen from './components/screens/GetNameScreen';
 import GetInfoScreen from './components/screens/GetInfoScreen';
 import ResultScreen from './components/screens/ResultsScreen';
 
+import SplashScreen from 'react-native-splash-screen';
+
 const Stack = createNativeStackNavigator();
 const App = () => {
+
+  //hide the splash screen
+  React.useEffect(()=>{
+    SplashScreen.hide();
+  })
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
