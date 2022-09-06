@@ -8,7 +8,7 @@
 
 import React from 'react';
 
-import {Text} from 'react-native';
+import {Settings, Text} from 'react-native';
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
@@ -16,9 +16,12 @@ import {NavigationContainer} from '@react-navigation/native';
 import WelcomeScreen from './components/screens/WelcomeScreen';
 import GetNameScreen from './components/screens/GetNameScreen';
 import GetInfoScreen from './components/screens/GetInfoScreen';
-import ResultScreen from './components/screens/ResultsScreen';
-
+import FitnessInfoScreen from './components/screens/FitnessInfoScreen';
+import IdenBodType from './components/screens/IdenBodTypeScreen';
 import SplashScreen from 'react-native-splash-screen';
+import HomeScreen from './components/screens/HomeScreen';
+import MoreScreen from './components/screens/MoreScreen';
+import SettingsScreen from './components/screens/SettingsScreen';
 
 const Stack = createNativeStackNavigator();
 const App = () => {
@@ -51,11 +54,34 @@ const App = () => {
         </Stack.Screen>
 
         <Stack.Screen
-        name="Result"
-        options={{headerShown: false}}
-        component={ResultScreen}>
+        name="FitnessInfo"
+        options={{headerShown: false, animation:'none'}}
+        component={FitnessInfoScreen}>
         </Stack.Screen>
 
+        <Stack.Screen
+        name="IdenBodType"
+        options={{headerShown: false}}
+        component={IdenBodType}>
+        </Stack.Screen>
+
+        <Stack.Screen
+        name="Home"
+        options={{headerShown: false, animation:'none'}}
+        component={HomeScreen}>
+        </Stack.Screen>
+
+        <Stack.Screen
+        name="More"
+        options={{headerShown: false, animation:'none'}}
+        component={MoreScreen}>
+        </Stack.Screen>
+
+        <Stack.Screen
+        name="Settings"
+        options={{headerShown: false, animation:'none'}}
+        component={SettingsScreen}>
+        </Stack.Screen>
 
       </Stack.Navigator>
     </NavigationContainer>

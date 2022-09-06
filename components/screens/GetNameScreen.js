@@ -18,7 +18,21 @@ import bg from '../../assets/images/bg-green-2.png';
 
 import { useNavigation } from "@react-navigation/native";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
+let STORAGE_KEY = '@user_name'
+
+
+
 export default function GetNameScreen() {
+
+  const saveData = async (value) =>{
+    try{
+      await AsyncStorage.setItem(STORAGE_KEY, value)
+      //alert('Data saved')
+    }catch(e){
+      //alert('failed to save')
+    }
+  }
 
     const navigation = useNavigation();
 
@@ -53,11 +67,11 @@ export default function GetNameScreen() {
             flexDirection:"row"
           }}
           onPress={()=>{
-            const firstName = name.split(' ')[0];
-            navigation.navigate("GetInfo", {name: firstName})
+            saveData(name);
+            navigation.navigate("GetInfo")
             }}>
           <Text style={{color:"#444444", fontSize:15, fontWeight:"500"}}>Continue</Text>
-          <Image style={{height:25, width:30, justifyContent:'center', resizeMode:"contain"}} source={require('../../assets/images/ic_arrow_forward.png')}></Image>
+          <Image style={{height:15, width:30, justifyContent:'center', resizeMode:"contain"}} source={require('../../assets/images/ic_arrow_forward.png')}></Image>
         </TouchableOpacity>
       </ImageBackground>
     </View>

@@ -46,9 +46,9 @@ export default function WelcomeScreen() {
             justifyContent:'center',
             flexDirection:"row"
           }}
-          onPress={()=>{navigation.navigate("GetName")}}>
-          <Text style={{color:"black", fontSize:15, fontWeight:"500"}}>Continue</Text>
-          <Image style={{height:25, width:30, justifyContent:'center', resizeMode:"contain"}} source={require('../../assets/images/ic_arrow_forward.png')}></Image>
+          onPress={()=>{navigation.navigate("FitnessInfo")}}>
+          <Text style={{color:"#444444", fontSize:15, fontWeight:"500"}}>Continue</Text>
+          <Image style={{height:15, width:30, justifyContent:'center', resizeMode:"contain"}} source={require('../../assets/images/ic_arrow_forward.png')}></Image>
         </TouchableOpacity>
       </ImageBackground>
     </View>

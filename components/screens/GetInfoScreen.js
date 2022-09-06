@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -14,13 +14,59 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+let STORAGE_KEY = '@user_name';
+
+import realm from '../realm';
 
 
-export default function GetInfoScreen({route}) {
+
+
+export default function GetInfoScreen() {
+
+  const saveUserInfo = (recordID, name, age, sex, weight, height) =>{
+    realm.write(() => {
+      const User = realm.create('UserInfo', {
+        recordID: recordID,
+        name: name,
+        age: age,
+        sex: sex,
+        weight: weight,
+        height: height
+      });
+    });
+  }
+
+  let user_name;
+
+  const readData = async () => {
+    try {
+      const value = await AsyncStorage.getItem(STORAGE_KEY);
+  
+      if (value !== null) {
+        user_name = value;
+        const firstName = value.split(' ')[0];
+        setName(firstName);
+      }
+    } catch (e) {
+      alert('failed to fetch name');
+    }
+  };
+
+  useEffect(() => {
+    readData();
+  });
+
+  const [name, setName] = useState("");
+  const [age, setAge] = useState(0);
+  const [sex, setSex] = useState("");
 
   const [height, onChangeHeight] = useState(0);
   const [weight, onChangeWeight] = useState(0);
+
+  const REC_ID = 2;
 
   const navigation = useNavigation();
   return (
@@ -48,8 +94,8 @@ export default function GetInfoScreen({route}) {
                 color: '#444',
                 fontSize: 35,
               }}>
-              {route.params.name}
-            </Text>
+                {name}
+              </Text>
 
             <Text style={{color: '#444', marginTop: 10, fontSize: 16}}>
               Please fill the information below to test your fitness. This will
@@ -63,11 +109,15 @@ export default function GetInfoScreen({route}) {
                 keyboardType="numeric"
                 placeholderTextColor="#8A8A8A"
                 placeholder="Age"
+                onChangeText={setAge}
+                value={age}
               />
               <TextInput
                 style={styles.input}
                 placeholderTextColor="#8A8A8A"
                 placeholder="Sex"
+                onChangeText={setSex}
+                value={sex}
               />
               <TextInput
                 style={styles.input}
@@ -76,7 +126,6 @@ export default function GetInfoScreen({route}) {
                 placeholder="Weight(kg)"
                 onChangeText={onChangeWeight}
                 value={weight}
-
               />
               <TextInput
                 style={styles.input}
@@ -86,45 +135,42 @@ export default function GetInfoScreen({route}) {
                 onChangeText={onChangeHeight}
                 value={height}
               />
-
-
             </View>
           </View>
         </View>
 
+        <Text style={{color:'#444444', alignSelf:'center', marginTop:50 }}>Step 1/2</Text>
+
         <TouchableOpacity
-        style={{
-          backgroundColor: '#4CD964',
-          marginVertical: 50,
-          width: '70%',
-          height: 45,
-          alignSelf: 'center',
-          borderRadius: 10,
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexDirection: 'row',
-        }}
-        
-        onPress={()=>{
-          navigation.navigate('Result',{
-            height:height,
-            weight:weight
-          })
-          }}>
-        <Text style={{color: 'black', fontSize: 15, fontWeight: '500'}}>
-          Next
-        </Text>
-        <Image
           style={{
-            height: 25,
-            width: 30,
+            backgroundColor: '#4CD964',
+            marginVertical: 50,
+            width: '70%',
+            height: 45,
+            alignSelf: 'center',
+            borderRadius: 10,
+            alignItems: 'center',
             justifyContent: 'center',
-            resizeMode: 'contain',
+            flexDirection: 'row',
           }}
-          source={require('../../assets/images/ic_arrow_forward.png')}></Image>
-      </TouchableOpacity>
+          onPress={() => {
+            navigation.navigate('IdenBodType');
+
+          // saveUserInfo(REC_ID, user_name, Number(age), sex, Number(weight), Number(height));
+          }}>
+          <Text style={{color: '#444444', fontSize: 15, fontWeight: '500'}}>
+            Next
+          </Text>
+          <Image
+            style={{
+              height: 15,
+              width: 30,
+              justifyContent: 'center',
+              resizeMode: 'contain',
+            }}
+            source={require('../../assets/images/ic_arrow_forward.png')}></Image>
+        </TouchableOpacity>
       </ScrollView>
-      
     </KeyboardAvoidingView>
   );
 }
