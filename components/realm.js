@@ -10,16 +10,17 @@ UserInfo.schema = {
         sex: "string",
         weight: "int",
         height: "int",
+        body_type: "string",
     },
     primaryKey: "recordID",
 };
 
-let realm = new Realm({schema:[UserInfo], schemaVersion: 3});
+let realm = new Realm({schema:[UserInfo], schemaVersion: 4});
 
 export default realm;
 
 let getUserInfo = () => {
-    return realm.objectForPrimaryKey('UserInfo', 2)
+    return realm.objectForPrimaryKey('UserInfo', 3)
 }
 
 export{ getUserInfo }

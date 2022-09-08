@@ -5,9 +5,7 @@ import {
   StatusBar,
   StyleSheet,
   Text,
-  useColorScheme,
   View,
-  ImageBackground,
   Image,
   TouchableOpacity,
   TextInput,
@@ -15,48 +13,15 @@ import {
 } from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
-let STORAGE_KEY = '@user_name';
+export default function GetInfoScreen({route}) {
 
-import realm from '../realm';
-
-
-
-
-export default function GetInfoScreen() {
-
-  const saveUserInfo = (recordID, name, age, sex, weight, height) =>{
-    realm.write(() => {
-      const User = realm.create('UserInfo', {
-        recordID: recordID,
-        name: name,
-        age: age,
-        sex: sex,
-        weight: weight,
-        height: height
-      });
-    });
-  }
-
-  let user_name;
-
-  const readData = async () => {
-    try {
-      const value = await AsyncStorage.getItem(STORAGE_KEY);
-  
-      if (value !== null) {
-        user_name = value;
-        const firstName = value.split(' ')[0];
-        setName(firstName);
-      }
-    } catch (e) {
-      alert('failed to fetch name');
-    }
-  };
+  const user_name = route.params.name;
 
   useEffect(() => {
-    readData();
+    // readData();
+    const firstName = user_name.split(' ')[0];
+    setName(firstName);
   });
 
   const [name, setName] = useState("");
@@ -154,9 +119,14 @@ export default function GetInfoScreen() {
             flexDirection: 'row',
           }}
           onPress={() => {
-            navigation.navigate('IdenBodType');
-
-          // saveUserInfo(REC_ID, user_name, Number(age), sex, Number(weight), Number(height));
+            navigation.navigate('IdenBodType', {
+              name: user_name, 
+              age: age,
+              sex: sex,
+              weight:weight,
+              height:height
+            });
+            //saveUserInfo(REC_ID, user_name, Number(age), sex, Number(weight), Number(height));
           }}>
           <Text style={{color: '#444444', fontSize: 15, fontWeight: '500'}}>
             Next

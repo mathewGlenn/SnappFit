@@ -21,6 +21,7 @@ export default function FitnessInfoScreen({route}) {
   const name = getUserInfo().name;
   const weight = getUserInfo().weight;
   const height = getUserInfo().height;
+  const body_type = getUserInfo().body_type;
 
   const mSquared = Math.pow((height/100), 2)
   const BMI = weight/mSquared;
@@ -78,7 +79,7 @@ export default function FitnessInfoScreen({route}) {
             </Text>
 
             <Text style={styles.subtitle}>{'Body Type:'}</Text>
-            <Text style={styles.value}>{'Mesomorph'}</Text>
+            <Text style={styles.value}>{body_type}</Text>
 
             <Text style={styles.subtitle}>{'Suggested Goal:'}</Text>
             <Text style={styles.value}>{'Maintain'}</Text>

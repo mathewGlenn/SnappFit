@@ -16,7 +16,6 @@ import {
 
   
 import bg from '../../assets/images/bg-green-1.png';
-import { color } from "@rneui/base";
 export default function WelcomeScreen() {
     const navigation = useNavigation();
   return (
@@ -46,7 +45,7 @@ export default function WelcomeScreen() {
             justifyContent:'center',
             flexDirection:"row"
           }}
-          onPress={()=>{navigation.navigate("FitnessInfo")}}>
+          onPress={()=>{navigation.navigate("GetName")}}>
           <Text style={{color:"#444444", fontSize:15, fontWeight:"500"}}>Continue</Text>
           <Image style={{height:15, width:30, justifyContent:'center', resizeMode:"contain"}} source={require('../../assets/images/ic_arrow_forward.png')}></Image>
         </TouchableOpacity>

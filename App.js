@@ -6,9 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
-
-import {Settings, Text} from 'react-native';
+import React, {useEffect} from 'react';
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
@@ -22,70 +20,62 @@ import SplashScreen from 'react-native-splash-screen';
 import HomeScreen from './components/screens/HomeScreen';
 import MoreScreen from './components/screens/MoreScreen';
 import SettingsScreen from './components/screens/SettingsScreen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import {useState} from 'react';
 
 const Stack = createNativeStackNavigator();
 const App = () => {
+  
+  const [isFirstTimeUse, setIfFirstTimeUse] = useState(true);
+
+  const checkIfFirstTimeUse = async () => {
+    try {
+      const value = await AsyncStorage.getItem('@firstTimeUser');
+
+      if (value === 'false') {
+        setIfFirstTimeUse(false);
+      } else {
+        setIfFirstTimeUse(true);
+      }
+    } catch (e) {
+      alert('failed to fetch data');
+    }
+  };
 
   //hide the splash screen
-  React.useEffect(()=>{
+  useEffect(() => {
+    checkIfFirstTimeUse();
     SplashScreen.hide();
-  })
+  });
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-
-      <Stack.Screen
-        name="Welcome"
-        options={{headerShown: false}}
-        component={WelcomeScreen}>
-        </Stack.Screen>
-
+      <Stack.Navigator screenOptions={{headerShown: false, animation: 'fade'}}>
+        {isFirstTimeUse ? (
+          <>
+            <Stack.Screen
+              name="Welcome"
+              component={WelcomeScreen}></Stack.Screen>
+          </>
+        ) : (
+          <>
+            <Stack.Screen name="Home" component={HomeScreen}></Stack.Screen>
+          </>
+        )}
+        <Stack.Screen name="GetName" component={GetNameScreen}></Stack.Screen>
+        <Stack.Screen name="GetInfo" component={GetInfoScreen}></Stack.Screen>
+        <Stack.Screen name="IdenBodType" component={IdenBodType}></Stack.Screen>
         <Stack.Screen
-        name="GetName"
-        options={{headerShown: false}}
-        component={GetNameScreen}>
-        </Stack.Screen>
-
-        <Stack.Screen
-        name="GetInfo"
-        options={{headerShown: false}}
-        component={GetInfoScreen}>
-        </Stack.Screen>
-
-        <Stack.Screen
-        name="FitnessInfo"
-        options={{headerShown: false, animation:'none'}}
-        component={FitnessInfoScreen}>
-        </Stack.Screen>
-
-        <Stack.Screen
-        name="IdenBodType"
-        options={{headerShown: false}}
-        component={IdenBodType}>
-        </Stack.Screen>
-
-        <Stack.Screen
-        name="Home"
-        options={{headerShown: false, animation:'none'}}
-        component={HomeScreen}>
-        </Stack.Screen>
-
-        <Stack.Screen
-        name="More"
-        options={{headerShown: false, animation:'none'}}
-        component={MoreScreen}>
-        </Stack.Screen>
-
-        <Stack.Screen
-        name="Settings"
-        options={{headerShown: false, animation:'none'}}
-        component={SettingsScreen}>
-        </Stack.Screen>
-
+          name="FitnessInfo"
+          component={FitnessInfoScreen}></Stack.Screen>
+        <Stack.Screen name="More" component={MoreScreen}></Stack.Screen>
+        <Stack.Screen name="Settings" component={SettingsScreen}></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
+
+const Router = props => {};
 
 export default App;
