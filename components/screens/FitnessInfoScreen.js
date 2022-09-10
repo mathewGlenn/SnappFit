@@ -38,8 +38,6 @@ export default function FitnessInfoScreen({route}) {
       BMIStatus = 'Obese';
     }
 
-  const tryNum = weight+height;
-
   const navigation = useNavigation();
 
   return (

@@ -76,7 +76,8 @@ function ToolsCard(props) {
         borderRadius: 10,
         padding:5,
         marginRight:20
-      }}>
+      }}
+      onPress={props.onPress}>
       <Image
         style={{height: 25, marginBottom: 10, resizeMode: 'contain'}}
         source={props.img}></Image>

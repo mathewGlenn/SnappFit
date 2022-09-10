@@ -19,6 +19,8 @@ import { useNavigation } from '@react-navigation/native';
 export default function SettingsScreen({route}) {
   const navigation = useNavigation();
 
+  const name = getUserInfo().name;
+
   return (
     <View
       style={styles.container}>
@@ -28,9 +30,28 @@ export default function SettingsScreen({route}) {
 
         <ImageBackground style={styles.imageTop}
         source={settingsImgTop}>
-            <View style={{marginTop:StatusBar.currentHeight}}>
                 <Text style={styles.screenTitle}>{'Settings'}</Text>
-            </View>
+
+                <View style={{
+                  position:'absolute', 
+                  bottom:0,
+                  marginHorizontal:20,
+                  marginBottom:20,
+                  flexDirection:'row',
+                  alignItems:'center'
+                }}>
+                <Text style={{
+
+                  fontFamily:'montserrat_semi_bold',
+                  fontSize:20,
+                  color:"#ffffff",
+                  marginRight:20
+                }}>{name}</Text>
+
+                <TouchableOpacity>
+                <Image source={require('../../assets/images/ic_edit.png')} style={{height:20, width:22, resizeMode:'contain'}}/>
+                </TouchableOpacity>
+                </View>
 
         </ImageBackground>
 
@@ -54,6 +75,7 @@ const styles = StyleSheet.create({
   },
   imageTop:{
     height: 250,
+    paddingTop:20
   },
   screenTitle:{
     fontSize:20,

@@ -21,12 +21,12 @@ import HomeScreen from './components/screens/HomeScreen';
 import MoreScreen from './components/screens/MoreScreen';
 import SettingsScreen from './components/screens/SettingsScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import BMICalculator from './components/screens/BMICalculator';
 
 import {useState} from 'react';
 
 const Stack = createNativeStackNavigator();
 const App = () => {
-  
   const [isFirstTimeUse, setIfFirstTimeUse] = useState(true);
 
   const checkIfFirstTimeUse = async () => {
@@ -53,24 +53,17 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false, animation: 'fade'}}>
         {isFirstTimeUse ? (
-          <>
-            <Stack.Screen
-              name="Welcome"
-              component={WelcomeScreen}></Stack.Screen>
-          </>
+            <Stack.Screen name="Welcome" component={WelcomeScreen} />
         ) : (
-          <>
-            <Stack.Screen name="Home" component={HomeScreen}></Stack.Screen>
-          </>
+            <Stack.Screen name="Home" component={HomeScreen} />
         )}
-        <Stack.Screen name="GetName" component={GetNameScreen}></Stack.Screen>
-        <Stack.Screen name="GetInfo" component={GetInfoScreen}></Stack.Screen>
-        <Stack.Screen name="IdenBodType" component={IdenBodType}></Stack.Screen>
-        <Stack.Screen
-          name="FitnessInfo"
-          component={FitnessInfoScreen}></Stack.Screen>
-        <Stack.Screen name="More" component={MoreScreen}></Stack.Screen>
-        <Stack.Screen name="Settings" component={SettingsScreen}></Stack.Screen>
+        <Stack.Screen name="GetName" component={GetNameScreen} />
+        <Stack.Screen name="GetInfo" component={GetInfoScreen} />
+        <Stack.Screen name="IdenBodType" component={IdenBodType} />
+        <Stack.Screen name="FitnessInfo" component={FitnessInfoScreen} />
+        <Stack.Screen name="More" component={MoreScreen} />
+        <Stack.Screen name="Settings" component={SettingsScreen} />
+        <Stack.Screen name='BMICalc' component={BMICalculator} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -149,37 +149,48 @@ export default function HomeScreen() {
                 fontSize: 17,
                 color: '#444',
                 marginTop: 40,
-                marginBottom:10,
+                marginBottom: 10,
                 fontFamily: 'montserrat_semi_bold',
               }}>
               {'Exercises'}
             </Text>
 
-            <ExercisesCard text="Indoor Excercises" img={require('../../assets/images/img_exer_indoor.png')}/>
-            <ExercisesCard text="Outdoor Excercises" img={require('../../assets/images/img_exer_outdoor.png')}/>
+            <ExercisesCard
+              text="Indoor Excercises"
+              img={require('../../assets/images/img_exer_indoor.png')}
+            />
+            <ExercisesCard
+              text="Outdoor Excercises"
+              img={require('../../assets/images/img_exer_outdoor.png')}
+            />
           </View>
 
           <View>
-          <Text
-            style={{
-              fontSize: 17,
-              color: '#444',
-              marginTop: 20,
-              fontFamily: 'montserrat_semi_bold',
-            }}>
-            {'Other Tools'}
-          </Text>
+            <Text
+              style={{
+                fontSize: 17,
+                color: '#444',
+                marginTop: 20,
+                fontFamily: 'montserrat_semi_bold',
+              }}>
+              {'Other Tools'}
+            </Text>
 
-          <View style={{flexDirection:'row', marginTop:10}}>
-          <ToolsCard img={require('../../assets/images/ic_fitness.png')} text={'BMI Calculator'}/>
+            <View style={{flexDirection: 'row', marginTop: 10}}>
+              <ToolsCard
+                onPress = {()=>{navigation.navigate('BMICalc')}}
+                img={require('../../assets/images/ic_fitness.png')}
+                text={'BMI Calculator'}
+              />
 
-<ToolsCard img={require('../../assets/images/ic_body.png')} text={'Body Type Identifier'}/>
+              <ToolsCard
+                img={require('../../assets/images/ic_body.png')}
+                text={'Body Type Identifier'}
+              />
+            </View>
           </View>
-          </View>
 
-          <View style={{height:70}}></View>
-
-
+          <View style={{height: 70}}></View>
         </View>
       </ScrollView>
 
