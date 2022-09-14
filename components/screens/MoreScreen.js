@@ -33,6 +33,7 @@ export default function MoreScreen({route}) {
               text={'What is a Calorie?'}
               img={require('../../assets/images/img_calorie.jpg')}
               cardColor="#9756A7"
+              onPress={()=>{navigation.navigate('Discover')}}
             />
 
             <Card

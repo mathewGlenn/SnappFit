@@ -28,7 +28,7 @@ export default function HomeScreen() {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor="#000000" />
+<StatusBar translucent backgroundColor='black' />
       <ScrollView>
         <View style={{marginHorizontal: 15, marginTop: 15}}>
           <Text
@@ -133,16 +133,6 @@ export default function HomeScreen() {
           <Text style={styles.subtitle}>{'Suggested Calorie Intake:'}</Text>
           <Text style={styles.value}>{'2,000 kCal/day'}</Text>
 
-          <Text
-            style={{
-              fontSize: 17,
-              color: '#444',
-              marginTop: 40,
-              fontFamily: 'montserrat_semi_bold',
-            }}>
-            {'Discover'}
-          </Text>
-
           <View>
             <Text
               style={{
@@ -213,6 +203,7 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop:StatusBar.currentHeight
   },
   subtitle: {
     fontFamily: 'Montserrat-Bold',

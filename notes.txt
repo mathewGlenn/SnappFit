@@ -1,0 +1,3 @@
+maintain weight - Your BMI is normal. You should maintain your weight
+gain weight- Your BMI is below normal. It is advised you gain weight.
+lose weight- Your BMI is above normal. It is advised you lose some weight.

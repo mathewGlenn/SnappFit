@@ -23,6 +23,8 @@ export default function FitnessInfoScreen({route}) {
   const height = getUserInfo().height;
   const body_type = getUserInfo().body_type;
 
+  
+
   const mSquared = Math.pow((height/100), 2)
   const BMI = weight/mSquared;
 

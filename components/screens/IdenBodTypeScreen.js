@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
-import bodyTypeImg from "../../assets/images/sample_body_type.jpg";
+import bodyTypeImg from "../../assets/images/body_placeholder.png";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import realm from '../realm';
@@ -19,37 +19,13 @@ import realm from '../realm';
 
 export default function IdenBodTypeScreen({route}) {
 
-  const saveUserInfo = (recordID, name, age, sex, weight, height, body_type) =>{
-    realm.write(() => {
-      const User = realm.create('UserInfo', {
-        recordID: recordID,
-        name: name,
-        age: age,
-        sex: sex,
-        weight: weight,
-        height: height,
-        body_type: body_type
-      });
-    });
-  }
 
-  const name = route.params.name;
+  const user_name = route.params.name;
   const age = route.params.age;
   const sex = route.params.sex;
   const weight = route.params.weight;
   const height = route.params.height;
 
-  let dummy_body_type = "Mesomorph";
-
-
-  const saveAsync = async (key, value) =>{
-    try{
-      await AsyncStorage.setItem(key, value)
-      alert('Data saved')
-    }catch(e){
-      alert('failed to save')
-    }
-  }
 
   const navigation = useNavigation();
   return (
@@ -73,7 +49,7 @@ export default function IdenBodTypeScreen({route}) {
             </Text>
           </View>
 
-          <Image source={bodyTypeImg} style={{alignSelf:'center', marginTop:100}}/>
+          <Image source={bodyTypeImg} style={{alignSelf:'center', marginTop:50, height:300, resizeMode:'contain'}}/>
         </View>
 
         <Text style={{color:'#444444', alignSelf:'center', marginTop:50 }}>Step 2/2</Text>
@@ -91,21 +67,17 @@ export default function IdenBodTypeScreen({route}) {
             flexDirection: 'row',
           }}
           onPress={() => {
-            saveAsync("@firstTimeUser", "false")
-            saveUserInfo(3, name, Number(age), sex, Number(weight), Number(height), dummy_body_type);
-            navigation.navigate('FitnessInfo');
+            navigation.navigate('Camera', {
+              name: user_name, 
+              age: age,
+              sex: sex,
+              weight:weight,
+              height:height
+            });
           }}>
           <Text style={{color: '#444444', fontSize: 15, fontWeight: '500'}}>
-            Next
+            {"Select a Photo"}
           </Text>
-          <Image
-            style={{
-              height: 15,
-              width: 30,
-              justifyContent: 'center',
-              resizeMode: 'contain',
-            }}
-            source={require('../../assets/images/ic_arrow_forward.png')}></Image>
         </TouchableOpacity>
       </ScrollView>
     </View>

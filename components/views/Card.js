@@ -19,7 +19,9 @@ function Card(props) {
         flex: 1,
         borderRadius: 15,
         elevation: 10,
-      }}>
+      }}
+      
+      onPress={props.onPress}>
       <Text
         style={{
           fontSize: 17,

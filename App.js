@@ -22,6 +22,8 @@ import MoreScreen from './components/screens/MoreScreen';
 import SettingsScreen from './components/screens/SettingsScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import BMICalculator from './components/screens/BMICalculator';
+import CameraScreen from './components/screens/CameraScreen';
+import DiscoverScreen from './components/screens/discover/DiscoverScreen';
 
 import {useState} from 'react';
 
@@ -64,6 +66,10 @@ const App = () => {
         <Stack.Screen name="More" component={MoreScreen} />
         <Stack.Screen name="Settings" component={SettingsScreen} />
         <Stack.Screen name='BMICalc' component={BMICalculator} />
+        <Stack.Screen name='Camera' component={CameraScreen} />
+
+        <Stack.Screen name='Discover' component={DiscoverScreen}/>
+      
       </Stack.Navigator>
     </NavigationContainer>
   );

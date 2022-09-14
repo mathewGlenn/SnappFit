@@ -125,6 +125,7 @@ export default function BMICalculator() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop:StatusBar.currentHeight
   },
   screenTitle: {
     fontSize: 20,
