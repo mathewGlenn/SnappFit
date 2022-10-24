@@ -17,16 +17,46 @@ import fitnessIcon from '../../assets/images/ic_fitness.png';
 
 import {useNavigation} from '@react-navigation/native';
 
+import SettingOption from '../views/SettingOption';
+
+import EditNameModal from '../views/EditNameModal';
+
+import {useState} from 'react';
+
 export default function SettingsScreen({route}) {
   const navigation = useNavigation();
 
   const name = getUserInfo().name;
+
+  const [modalVisible, setModalVisible] = useState(false);
+  const [editName, setEditName] = useState(name);
+
+  const handleSaveEdit = () => {
+    let update = realm.objects('UserInfo');
+    realm.write(() => {
+      update[0].name = editName;
+    });
+  };
 
   return (
     <View style={styles.container}>
       <ScrollView>
         <View>
           <StatusBar translucent backgroundColor="transparent" />
+
+          <EditNameModal
+            modalVisible={modalVisible}
+            modalName={name}
+            onRequestCloseModal={() => {
+              setModalVisible(false);
+            }}
+            onChangeText={setEditName}
+
+            submit={()=>{
+              handleSaveEdit();
+              setModalVisible(false)
+            }}
+          />
 
           <ImageBackground style={styles.imageTop} source={settingsImgTop}>
             <Text style={styles.screenTitle}>{'Settings'}</Text>
@@ -50,7 +80,10 @@ export default function SettingsScreen({route}) {
                 {name}
               </Text>
 
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  setModalVisible(true);
+                }}>
                 <Image
                   source={require('../../assets/images/ic_edit.png')}
                   style={{height: 20, width: 22, resizeMode: 'contain'}}
@@ -59,55 +92,20 @@ export default function SettingsScreen({route}) {
             </View>
           </ImageBackground>
 
-          <TouchableOpacity
-            style={{marginTop: 20, marginLeft: 20, flexDirection: 'row'}}>
-            <Image source={fitnessIcon} style={{height: 25, width: 25}}></Image>
-            <Text
-              style={{
-                color: '#1C1D1D',
-                fontFamily: 'montserrat_semi_bold',
-                fontSize: 17,
-                marginStart: 20,
-              }}>
-              Take fitness test
-            </Text>
-
-            <Image
-              source={require('../../assets/images/ic_arrow_no_tail.png')}
-              style={{
-                width: 20,
-                height: 20,
-                resizeMode: 'contain',
-                marginLeft: 'auto',
-                marginRight: 20,
-              }}></Image>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={{marginTop: 20, marginLeft: 20, flexDirection: 'row'}}>
-            <Image source={require('../../assets/images/ic_info.png')} style={{height: 25, width: 25}}></Image>
-            <Text
-              style={{
-                color: '#1C1D1D',
-                fontFamily: 'montserrat_semi_bold',
-                fontSize: 17,
-                marginStart: 20,
-              }}>
-              About SnappFit
-            </Text>
-
-            <Image
-              source={require('../../assets/images/ic_arrow_no_tail.png')}
-              style={{
-                width: 20,
-                height: 20,
-                resizeMode: 'contain',
-                marginLeft: 'auto',
-                marginRight: 20,
-              }}></Image>
-          </TouchableOpacity>
-
-
+          <SettingOption
+            image={require('../../assets/images/ic_fitness.png')}
+            text={'Retake fitness test'}
+            onPress={() => {
+              navigation.navigate('GetInfo', {name: name});
+            }}
+          />
+          <SettingOption
+            image={require('../../assets/images/ic_info.png')}
+            text={'About'}
+            onPress={() => {
+              navigation.navigate('About');
+            }}
+          />
         </View>
       </ScrollView>
 

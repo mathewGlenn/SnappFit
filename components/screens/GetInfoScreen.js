@@ -12,10 +12,10 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 
+
 import {useNavigation} from '@react-navigation/native';
 
 export default function GetInfoScreen({route}) {
-
   const user_name = route.params.name;
 
   useEffect(() => {
@@ -24,12 +24,16 @@ export default function GetInfoScreen({route}) {
     setName(firstName);
   });
 
-  const [name, setName] = useState("");
+  const [name, setName] = useState('');
   const [age, setAge] = useState(0);
-  const [sex, setSex] = useState("");
+  const [sex, setSex] = useState('');
 
   const [height, onChangeHeight] = useState(0);
   const [weight, onChangeWeight] = useState(0);
+
+  const [openDropDown, setOpenDropDown] = useState(false);
+  const [dropdownValue, setDropdownValue] = useState('Sex');
+  const sexChoices = ['Male', 'Female'];
 
   const REC_ID = 2;
 
@@ -59,8 +63,8 @@ export default function GetInfoScreen({route}) {
                 color: '#444',
                 fontSize: 35,
               }}>
-                {name}
-              </Text>
+              {name}
+            </Text>
 
             <Text style={{color: '#444', marginTop: 10, fontSize: 16}}>
               Please fill the information below to test your fitness. This will
@@ -84,6 +88,8 @@ export default function GetInfoScreen({route}) {
                 onChangeText={setSex}
                 value={sex}
               />
+
+
               <TextInput
                 style={styles.input}
                 keyboardType="numeric"
@@ -104,7 +110,9 @@ export default function GetInfoScreen({route}) {
           </View>
         </View>
 
-        <Text style={{color:'#444444', alignSelf:'center', marginTop:50 }}>Step 1/2</Text>
+        <Text style={{color: '#444444', alignSelf: 'center', marginTop: 50}}>
+          Step 1/2
+        </Text>
 
         <TouchableOpacity
           style={{
@@ -120,11 +128,11 @@ export default function GetInfoScreen({route}) {
           }}
           onPress={() => {
             navigation.navigate('IdenBodType', {
-              name: user_name, 
+              name: user_name,
               age: age,
               sex: sex,
-              weight:weight,
-              height:height
+              weight: weight,
+              height: height,
             });
             //saveUserInfo(REC_ID, user_name, Number(age), sex, Number(weight), Number(height));
           }}>
@@ -151,6 +159,7 @@ const styles = StyleSheet.create({
     marginTop: StatusBar.currentHeight,
   },
   input: {
+    borderColor: 'transparent',
     height: 42,
     width: '90%',
     borderRadius: 10,

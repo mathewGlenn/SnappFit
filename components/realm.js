@@ -11,6 +11,7 @@ UserInfo.schema = {
         weight: "int",
         height: "int",
         body_type: "string",
+        bmr: "int"
     },
     primaryKey: "recordID",
 };

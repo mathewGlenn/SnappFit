@@ -48,7 +48,7 @@ function Card(props) {
 
 function ExercisesCard(props) {
   return (
-    <TouchableOpacity style={{flex: 1, marginBottom: 20, elevation: 5}}>
+    <TouchableOpacity style={{flex: 1, marginBottom: 20, elevation: 5}} onPress={props.onPress}>
       <ImageBackground
         style={{alignItems: 'center', justifyContent: 'center', height: 100}}
         imageStyle={{borderRadius: 10}}

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, TouchableOpacity} from 'react-native';
 
-export default function CircleBackButton() {
+export default function CircleBackButton(props) {
   return (
     <TouchableOpacity
       style={{
@@ -12,7 +12,8 @@ export default function CircleBackButton() {
         alignItems: 'center',
         justifyContent: 'center',
         margin:20
-      }}>
+      }}
+      onPress={props.onPress}>
       <Image
         source={require('../../assets/images/ic_arrow_back.png')}
         style={{height: 20, width: 20}}></Image>

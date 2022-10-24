@@ -22,6 +22,7 @@ export default function FitnessInfoScreen({route}) {
   const weight = getUserInfo().weight;
   const height = getUserInfo().height;
   const body_type = getUserInfo().body_type;
+  const BMR = getUserInfo().bmr;
 
   
 
@@ -41,6 +42,23 @@ export default function FitnessInfoScreen({route}) {
     }
 
   const navigation = useNavigation();
+
+  var suggestedGoal = '';
+  var suggestedGoalMoreInfo = '';
+
+  if (BMI < 18.5) {
+    suggestedGoal = 'Gain weight';
+
+  } else if (BMI >= 18.5 && BMI <= 24.9) {
+    suggestedGoal = 'Maintain weight';
+
+  } else if (BMI >= 25 && BMI <= 29.9) {
+    suggestedGoal = 'Lose weight';
+
+  } else if (BMI > 30) {
+    suggestedGoal = 'Lose weight';
+
+  }
 
   return (
     <View
@@ -82,10 +100,10 @@ export default function FitnessInfoScreen({route}) {
             <Text style={styles.value}>{body_type}</Text>
 
             <Text style={styles.subtitle}>{'Suggested Goal:'}</Text>
-            <Text style={styles.value}>{'Maintain'}</Text>
+            <Text style={styles.value}>{suggestedGoal}</Text>
 
             <Text style={styles.subtitle}>{'Suggested Calorie Intake:'}</Text>
-            <Text style={styles.value}>{'2,000 kCal/day'}</Text>
+            <Text style={styles.value}>{BMR + ' kCal/day '}</Text>
             
             {/* <Text style={{color:"#000"}}>{JSON.stringify(getUserInfo())}</Text> */}
           </View>
@@ -103,7 +121,7 @@ export default function FitnessInfoScreen({route}) {
           onPress={()=>{
             //
             }}>
-          <Text style={{color:"#444444", fontSize:15, fontWeight:"500"}}>{'Retake fitness test'}</Text>
+          <Text onPress={()=>{navigation.navigate('GetInfo', {name: name})}} style={{color:"#444444", fontSize:15, fontWeight:"500"}}>{'Retake fitness test'}</Text>
           <Image style={{height:15, width:30, justifyContent:'center', resizeMode:"contain"}} source={require('../../assets/images/ic_arrow_forward.png')}></Image>
         </TouchableOpacity>
 

@@ -12,6 +12,7 @@ import {
 
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
+import BackButtonWithTitle from '../views/BackButtonWithTitle';
 
 export default function BMICalculator() {
 
@@ -50,17 +51,7 @@ export default function BMICalculator() {
     <View style={styles.container}>
       <StatusBar backgroundColor="#000000" />
 
-      <View style={styles.titleView}>
-        <TouchableOpacity
-        onPress={()=>{navigation.goBack()}}>
-          <Image
-            style={{height: 22, width: 22, resizeMode: 'contain'}}
-            source={require('../../assets/images/ic_arrow_back.png')}
-          />
-        </TouchableOpacity>
-        <Text style={styles.screenTitle}>{'BMI Calculator'}</Text>
-      </View>
-
+      <BackButtonWithTitle title="BMI Calculator" onPress={()=>{navigation.goBack()}}/>
       <Text
         style={{
           color: '#444444',
@@ -126,18 +117,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop:StatusBar.currentHeight
-  },
-  screenTitle: {
-    fontSize: 20,
-    fontFamily: 'montserrat_semi_bold',
-    color: '#444444',
-    marginLeft: 20,
-  },
-  titleView: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginStart: 20,
-    marginTop: 20,
   },
   input: {
     height: 42,

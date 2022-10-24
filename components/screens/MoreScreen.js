@@ -33,13 +33,28 @@ export default function MoreScreen({route}) {
               text={'What is a Calorie?'}
               img={require('../../assets/images/img_calorie.jpg')}
               cardColor="#9756A7"
-              onPress={()=>{navigation.navigate('Discover')}}
+              onPress={()=>{navigation.navigate('Discover', {topic: "Calorie"})}}
             />
 
             <Card
               text={'What is a Protein?'}
               img={require('../../assets/images/img_protein.jpg')}
               cardColor="#66A8B1"
+              onPress={()=>{navigation.navigate('Discover', {topic: "Protein"})}}
+            />
+            
+            <Card
+              text={'What is a Fat?'}
+              img={require('../../assets/images/img_fats.png')}
+              cardColor="#f4a261"
+              onPress={()=>{navigation.navigate('Discover', {topic: "Fat"})}}
+            />
+
+<Card
+              text={'What is a Carbohydrate?'}
+              img={require('../../assets/images/img_carb.png')}
+              cardColor="#264653"
+              onPress={()=>{navigation.navigate('Discover', {topic: "Carb"})}}
             />
             
 

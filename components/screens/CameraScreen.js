@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {StatusBar} from 'react-native';
 import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {Camera} from 'react-native-pytorch-core';
@@ -23,6 +23,7 @@ export default function CameraScreen({route}) {
     weight,
     height,
     body_type,
+    bmr
   ) => {
     realm.write(() => {
       const User = realm.create('UserInfo', {
@@ -33,7 +34,27 @@ export default function CameraScreen({route}) {
         weight: weight,
         height: height,
         body_type: body_type,
+        bmr
       });
+    });
+  };
+
+  const updateInfo = (
+    age,
+    sex,
+    weight,
+    height,
+    body_type,
+    bmr
+  ) => {
+    let update = realm.objects('UserInfo');
+    realm.write(() => {
+      update[0].age = age,
+      update[0].sex = sex,
+      update[0].weight = weight,
+      update[0].height = height,
+      update[0].body_type = body_type
+      update[0].bmr = bmr
     });
   };
 
@@ -50,6 +71,7 @@ export default function CameraScreen({route}) {
     'Capture a whole body image or choose an image from the gallery.',
   );
   const [isVisibleDiagnosis, setIsVisibleDiagnosis] = useState(false);
+  const [isFirstTimeUse, setIfFirstTimeUse] = useState(true);
 
   async function handleImage(image) {
     const result = await classifyImage(image);
@@ -61,6 +83,32 @@ export default function CameraScreen({route}) {
     image.release();
   }
 
+  
+  const checkIfFirstTimeUse = async () => {
+    try {
+      const value = await AsyncStorage.getItem('@firstTimeUser');
+
+      if (value === 'false') {
+        setIfFirstTimeUse(false);
+      } else {
+        setIfFirstTimeUse(true);
+      }
+    } catch (e) {
+      alert('failed to fetch data');
+    }
+  };
+
+  useEffect(() => {
+    checkIfFirstTimeUse();
+  });
+
+  var BMR = 0;
+
+  if(sex === 'Male'){
+    BMR = (10*weight) + (6.25*height) - (5*age) + 5
+  }else if(sex === 'Female'){
+    BMR = (10*weight) + (6.25*height) - (5*age) - 161
+  }
   return (
     <View style={StyleSheet.absoluteFill}>
       <StatusBar translucent backgroundColor="transparent" />
@@ -83,7 +131,7 @@ export default function CameraScreen({route}) {
           {label}
         </Text>
 
-        <TouchableOpacity style={isVisibleDiagnosis ? {} : {display: 'none'}}>
+        <TouchableOpacity  style={isVisibleDiagnosis ? {} : {display: 'none'}}>
           <Text
             style={{
               color: '#444444',
@@ -95,21 +143,38 @@ export default function CameraScreen({route}) {
               borderRadius: 10,
             }}
             onPress={() => {
-              navigation.navigate('FitnessInfo');
-              saveAsync('@firstTimeUser', 'false');
-              saveUserInfo(
-                3,
-                user_name,
+              if(isFirstTimeUse){
+                navigation.navigate('FitnessInfo');
+                saveAsync('@firstTimeUser', 'false');
+                saveUserInfo(
+                  3,
+                  user_name,
+                  Number(age),
+                  sex,
+                  Number(weight),
+                  Number(height),
+                  label,
+                  BMR
+                );
+                return
+              }
+
+              navigation.navigate('FitnessInfo', {bmr: BMR});
+              updateInfo(
                 Number(age),
                 sex,
                 Number(weight),
                 Number(height),
                 label,
+                BMR
               );
+
+              alert('Your data has been updated');
             }}>
             {'Continue'}
           </Text>
         </TouchableOpacity>
+
       </View>
     </View>
   );

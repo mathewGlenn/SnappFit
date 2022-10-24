@@ -24,6 +24,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import BMICalculator from './components/screens/BMICalculator';
 import CameraScreen from './components/screens/CameraScreen';
 import DiscoverScreen from './components/screens/discover/DiscoverScreen';
+import ExercisesScreen from './components/screens/ExercisesScreen';
+import AboutUs from './components/screens/AboutUs';
+import BodyTypeIdentifier from './components/screens/BodyTypeIdentifier';
 
 import {useState} from 'react';
 
@@ -55,7 +58,10 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false, animation: 'fade'}}>
         {isFirstTimeUse ? (
+          <>
             <Stack.Screen name="Welcome" component={WelcomeScreen} />
+            <Stack.Screen name="Home" component={HomeScreen} />
+          </>
         ) : (
             <Stack.Screen name="Home" component={HomeScreen} />
         )}
@@ -69,6 +75,10 @@ const App = () => {
         <Stack.Screen name='Camera' component={CameraScreen} />
 
         <Stack.Screen name='Discover' component={DiscoverScreen}/>
+        <Stack.Screen name='Exercises' component={ExercisesScreen}/>
+        <Stack.Screen name='About' component={AboutUs}/>
+
+        <Stack.Screen name='BodyTypeIdentifier' component={BodyTypeIdentifier}/>
       
       </Stack.Navigator>
     </NavigationContainer>
