@@ -24,10 +24,6 @@ export default function SettingOption(props){
           style={{
             width: 20,
             height: 20,
-            resizeMode: 'contain',
-            marginLeft: 'auto',
-            marginRight: 20,
-          }}></Image>
-      </TouchableOpacity>
+            resizeMode: 'contain',n
     )
 }

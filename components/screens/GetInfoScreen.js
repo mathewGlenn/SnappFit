@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, FC} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -11,11 +11,15 @@ import {
   TextInput,
   KeyboardAvoidingView,
 } from 'react-native';
-
+import Dropdown from '../../components/Dropdown';
 
 import {useNavigation} from '@react-navigation/native';
 
 export default function GetInfoScreen({route}) {
+  const sexChoices = [
+    {label: 'Male', value: '1'},
+    {label: 'Female', value: '2'},
+  ];
   const user_name = route.params.name;
 
   useEffect(() => {
@@ -26,14 +30,10 @@ export default function GetInfoScreen({route}) {
 
   const [name, setName] = useState('');
   const [age, setAge] = useState(0);
-  const [sex, setSex] = useState('');
+  const [sex, setSex] = useState(undefined);
 
   const [height, onChangeHeight] = useState(0);
   const [weight, onChangeWeight] = useState(0);
-
-  const [openDropDown, setOpenDropDown] = useState(false);
-  const [dropdownValue, setDropdownValue] = useState('Sex');
-  const sexChoices = ['Male', 'Female'];
 
   const REC_ID = 2;
 
@@ -81,14 +81,7 @@ export default function GetInfoScreen({route}) {
                 onChangeText={setAge}
                 value={age}
               />
-              <TextInput
-                style={styles.input}
-                placeholderTextColor="#8A8A8A"
-                placeholder="Sex"
-                onChangeText={setSex}
-                value={sex}
-              />
-
+              <Dropdown label="Sex" data={sexChoices} onSelect={setSex} />
 
               <TextInput
                 style={styles.input}
@@ -127,13 +120,17 @@ export default function GetInfoScreen({route}) {
             flexDirection: 'row',
           }}
           onPress={() => {
-            navigation.navigate('IdenBodType', {
-              name: user_name,
-              age: age,
-              sex: sex,
-              weight: weight,
-              height: height,
-            });
+            if (age != '' && sex != undefined && weight != 0 && height != 0) {
+              navigation.navigate('IdenBodType', {
+                name: user_name,
+                age: age,
+                sex: sex.label,
+                weight: weight,
+                height: height,
+              });
+            } else {
+              alert('Please fill all information');
+            }
             //saveUserInfo(REC_ID, user_name, Number(age), sex, Number(weight), Number(height));
           }}>
           <Text style={{color: '#444444', fontSize: 15, fontWeight: '500'}}>
