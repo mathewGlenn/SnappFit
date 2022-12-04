@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import BottomNav from '../BottomNav';
 
@@ -24,7 +24,10 @@ const wait = timeout => {
   return new Promise(resolve => setTimeout(resolve, timeout));
 };
 
+
+
 export default function HomeScreen() {
+
   const name = getUserInfo().name;
   const weight = getUserInfo().weight;
   const height = getUserInfo().height;
@@ -35,19 +38,23 @@ export default function HomeScreen() {
 
   var suggestedGoal = '';
   var suggestedGoalMoreInfo = '';
+  var suggestedWorkout = '';
 
   if (BMI < 18.5) {
     suggestedGoal = 'Gain weight';
-    suggestedGoalMoreInfo = SuggestedGoal.gain;
+    suggestedWorkout = 'Resistance Training'
+
   } else if (BMI >= 18.5 && BMI <= 24.9) {
     suggestedGoal = 'Maintain weight';
-    suggestedGoalMoreInfo = SuggestedGoal.maintain;
+    suggestedWorkout = 'Flexibility Training'
+
   } else if (BMI >= 25 && BMI <= 29.9) {
     suggestedGoal = 'Lose weight';
-    suggestedGoalMoreInfo = SuggestedGoal.lose;
+    suggestedWorkout = 'Cardiovascular Training'
+
   } else if (BMI > 30) {
     suggestedGoal = 'Lose weight';
-    suggestedGoalMoreInfo = SuggestedGoal.lose;
+
   }
 
   const navigation = useNavigation();
@@ -165,10 +172,17 @@ export default function HomeScreen() {
 
           <Text style={styles.subtitle}>{'Suggested Goal:'}</Text>
           <Text style={styles.value}>{suggestedGoal}</Text>
-          <Text style={styles.valueSecondary}>{suggestedGoalMoreInfo}</Text>
+
 
           <Text style={styles.subtitle}>{'Suggested Calorie Intake:'}</Text>
           <Text style={styles.value}>{BMR + ' kCal/day'}</Text>
+
+          
+          <Text style={styles.subtitle}>{'Suggested Protein Intake:'}</Text>
+            <Text style={styles.value}>{(0.8*weight).toFixed(2) + ' grams/day '}</Text>
+
+            <Text style={styles.subtitle}>{'Suggested Workout:'}</Text>
+            <Text style={styles.value}>{suggestedWorkout}</Text>
 
           <View>
             <Text
@@ -232,6 +246,7 @@ export default function HomeScreen() {
                 img={require('../../assets/images/ic_body.png')}
                 text={'Body Type Identifier'}
               />
+              
             </View>
           </View>
 

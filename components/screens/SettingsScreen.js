@@ -51,10 +51,9 @@ export default function SettingsScreen({route}) {
               setModalVisible(false);
             }}
             onChangeText={setEditName}
-
-            submit={()=>{
+            submit={() => {
               handleSaveEdit();
-              setModalVisible(false)
+              setModalVisible(false);
             }}
           />
 
@@ -104,6 +103,14 @@ export default function SettingsScreen({route}) {
             text={'About'}
             onPress={() => {
               navigation.navigate('About');
+            }}
+          />
+
+          <SettingOption
+            image={require('../../assets/images/ic_history.png')}
+            text={'History'}
+            onPress={() => {
+              navigation.navigate('History');
             }}
           />
         </View>

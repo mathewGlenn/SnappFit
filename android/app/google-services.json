@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "653068659467",
+    "project_id": "snappfit-58026",
+    "storage_bucket": "snappfit-58026.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:653068659467:android:4d9805414749c62768500e",
+        "android_client_info": {
+          "package_name": "com.snappfit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "653068659467-djin446s2ck66r9cgvk52aabff1f8f9i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2qQpRdfsLPFPWGZtQYGj5U-GzNOTQJ1s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "653068659467-djin446s2ck66r9cgvk52aabff1f8f9i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

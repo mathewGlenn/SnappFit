@@ -45,15 +45,19 @@ export default function FitnessInfoScreen({route}) {
 
   var suggestedGoal = '';
   var suggestedGoalMoreInfo = '';
+  var suggestedWorkout = '';
 
   if (BMI < 18.5) {
     suggestedGoal = 'Gain weight';
+    suggestedWorkout = 'Resistance Training'
 
   } else if (BMI >= 18.5 && BMI <= 24.9) {
     suggestedGoal = 'Maintain weight';
+    suggestedWorkout = 'Flexibility Training'
 
   } else if (BMI >= 25 && BMI <= 29.9) {
     suggestedGoal = 'Lose weight';
+    suggestedWorkout = 'Cardiovascular Training'
 
   } else if (BMI > 30) {
     suggestedGoal = 'Lose weight';
@@ -104,6 +108,12 @@ export default function FitnessInfoScreen({route}) {
 
             <Text style={styles.subtitle}>{'Suggested Calorie Intake:'}</Text>
             <Text style={styles.value}>{BMR + ' kCal/day '}</Text>
+
+            <Text style={styles.subtitle}>{'Suggested Protein Intake:'}</Text>
+            <Text style={styles.value}>{(0.8*weight).toFixed(2) + ' grams/day '}</Text>
+
+            <Text style={styles.subtitle}>{'Suggested Workout:'}</Text>
+            <Text style={styles.value}>{suggestedWorkout}</Text>
             
             {/* <Text style={{color:"#000"}}>{JSON.stringify(getUserInfo())}</Text> */}
           </View>
@@ -118,10 +128,24 @@ export default function FitnessInfoScreen({route}) {
             flexDirection:"row",
             alignItems:'center'
           }}
-          onPress={()=>{
-            //
-            }}>
-          <Text onPress={()=>{navigation.navigate('GetInfo', {name: name})}} style={{color:"#444444", fontSize:15, fontWeight:"500"}}>{'Retake fitness test'}</Text>
+          onPress={()=>{navigation.navigate('GetInfo', {name: name})}}>
+          <Text  style={{color:"#444444", fontSize:15, fontWeight:"500"}}>{'Retake fitness test'}</Text>
+          <Image style={{height:15, width:30, justifyContent:'center', resizeMode:"contain"}} source={require('../../assets/images/ic_arrow_forward.png')}></Image>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={{
+            marginStart:15,
+            marginBottom:20,
+            width: '70%',
+            height: 45,
+            borderRadius: 10,
+            flexDirection:"row",
+            alignItems:'center',
+          }}
+          onPress={()=>{navigation.navigate('History', {name: name})}}>
+
+          <Text  style={{color:"#444444", fontSize:15, fontWeight:"500"}}>{'View history'}</Text>
           <Image style={{height:15, width:30, justifyContent:'center', resizeMode:"contain"}} source={require('../../assets/images/ic_arrow_forward.png')}></Image>
         </TouchableOpacity>
 

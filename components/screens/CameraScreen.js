@@ -6,6 +6,7 @@ import classifyImage from '../logic/ImageClassifier';
 import {useNavigation} from '@react-navigation/native';
 import realm from '../realm';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import firestore from '@react-native-firebase/firestore';
 
 export default function CameraScreen({route}) {
   const user_name = route.params.name;
@@ -61,9 +62,8 @@ export default function CameraScreen({route}) {
   const saveAsync = async (key, value) => {
     try {
       await AsyncStorage.setItem(key, value);
-      alert('Data saved');
     } catch (e) {
-      alert('failed to save');
+      alert('failed to save data');
     }
   };
 
@@ -143,6 +143,23 @@ export default function CameraScreen({route}) {
               borderRadius: 10,
             }}
             onPress={() => {
+
+              const mSquared = Math.pow(height / 100, 2);
+              const BMI = weight / mSquared;
+
+              const dateNow = Date.now();
+
+              firestore().collection('history')
+              .add({
+                weight: weight,
+                bmi: BMI,
+                body_type: label,
+                date: dateNow
+              })
+              .then(()=>{
+                console.log('history added')
+              })
+
               if(isFirstTimeUse){
                 navigation.navigate('FitnessInfo');
                 saveAsync('@firstTimeUser', 'false');

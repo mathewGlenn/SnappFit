@@ -27,6 +27,7 @@ import DiscoverScreen from './components/screens/discover/DiscoverScreen';
 import ExercisesScreen from './components/screens/ExercisesScreen';
 import AboutUs from './components/screens/AboutUs';
 import BodyTypeIdentifier from './components/screens/BodyTypeIdentifier';
+import History from './components/screens/History'
 
 import {useState} from 'react';
 
@@ -79,6 +80,7 @@ const App = () => {
         <Stack.Screen name='About' component={AboutUs}/>
 
         <Stack.Screen name='BodyTypeIdentifier' component={BodyTypeIdentifier}/>
+        <Stack.Screen name='History' component={History}/>
       
       </Stack.Navigator>
     </NavigationContainer>
