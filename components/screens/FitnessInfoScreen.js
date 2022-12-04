@@ -111,6 +111,9 @@ export default function FitnessInfoScreen({route}) {
 
             <Text style={styles.subtitle}>{'Suggested Protein Intake:'}</Text>
             <Text style={styles.value}>{(0.8*weight).toFixed(2) + ' grams/day '}</Text>
+            
+            <Text style={styles.subtitle}>{'Suggested Carbs Intake:'}</Text>
+            <Text style={styles.value}>{(4*weight).toFixed(2) + ' grams/day '}</Text>
 
             <Text style={styles.subtitle}>{'Suggested Workout:'}</Text>
             <Text style={styles.value}>{suggestedWorkout}</Text>

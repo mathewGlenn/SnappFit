@@ -116,9 +116,9 @@ export default function HomeScreen() {
                 marginEnd: 10,
               }}>
               <View style={{margin: 10}}>
-                <Text style={{fontSize: 17}}>Body Type</Text>
+                <Text style={{fontSize: 17, color:'#ffffff'}}>Body Type</Text>
                 <Text
-                  style={{fontSize: 20, fontFamily: 'montserrat_semi_bold'}}>
+                  style={{fontSize: 20, fontFamily: 'montserrat_semi_bold',  color:'#ffffff'}}>
                   Mesomorph
                 </Text>
               </View>
@@ -134,9 +134,9 @@ export default function HomeScreen() {
                   padding: 10,
                 }}>
                 <View>
-                  <Text style={{fontSize: 17}}>BMI</Text>
+                  <Text style={{fontSize: 17,  color:'#ffffff'}}>BMI</Text>
                   <Text
-                    style={{fontSize: 20, fontFamily: 'montserrat_semi_bold'}}>
+                    style={{fontSize: 20, fontFamily: 'montserrat_semi_bold',  color:'#ffffff'}}>
                     {BMI.toFixed(2)}
                   </Text>
                 </View>
@@ -152,17 +152,17 @@ export default function HomeScreen() {
                   padding: 10,
                 }}>
                 <View style={{flexDirection: 'row'}}>
-                  <Text style={{fontSize: 17}}>{'Height: '}</Text>
+                  <Text style={{fontSize: 17, color:'#ffffff'}}>{'Height: '}</Text>
                   <Text
-                    style={{fontSize: 17, fontFamily: 'montserrat_semi_bold'}}>
+                    style={{fontSize: 17, fontFamily: 'montserrat_semi_bold', color:'#ffffff'}}>
                     {height + ' cm'}
                   </Text>
                 </View>
 
                 <View style={{flexDirection: 'row'}}>
-                  <Text style={{fontSize: 17}}>{'Weight: '}</Text>
+                  <Text style={{fontSize: 17, color:'#ffffff'}}>{'Weight: '}</Text>
                   <Text
-                    style={{fontSize: 17, fontFamily: 'montserrat_semi_bold'}}>
+                    style={{fontSize: 17, fontFamily: 'montserrat_semi_bold', color:'#ffffff'}}>
                     {weight + ' kg'}
                   </Text>
                 </View>
@@ -180,6 +180,9 @@ export default function HomeScreen() {
           
           <Text style={styles.subtitle}>{'Suggested Protein Intake:'}</Text>
             <Text style={styles.value}>{(0.8*weight).toFixed(2) + ' grams/day '}</Text>
+
+            <Text style={styles.subtitle}>{'Suggested Carbs Intake:'}</Text>
+            <Text style={styles.value}>{(4*weight).toFixed(2) + ' grams/day '}</Text>
 
             <Text style={styles.subtitle}>{'Suggested Workout:'}</Text>
             <Text style={styles.value}>{suggestedWorkout}</Text>
